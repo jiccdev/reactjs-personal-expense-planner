@@ -1,10 +1,15 @@
 import React from 'react';
 import { icons } from '../../Icon';
 
-const CloseExpenseIcon = ({ handleNewSpending }) => {
+const CloseExpenseIcon = ({ handleNewSpending, resetFormField }) => {
   const { GrClose } = icons;
   return (
-    <span onClick={handleNewSpending}>
+    <span
+      onClick={() => {
+        handleNewSpending();
+        resetFormField();
+      }}
+    >
       <GrClose />
     </span>
   );

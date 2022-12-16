@@ -7,9 +7,17 @@ const App = () => {
   const [budget, setBudget] = useState(0);
   const [isValidBudget, setIsValidBudget] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [animateModal, setAnimateModal] = useState(false);
+  const [saveExpense, setSaveExpense] = useState([]);
 
   /** Handle expense modal */
-  const handleNewSpending = () => setIsOpenModal(!isOpenModal);
+  const handleNewSpending = () => {
+    setIsOpenModal(!isOpenModal);
+
+    setTimeout(() => {
+      setAnimateModal(true);
+    }, 300);
+  };
 
   return (
     <div>
@@ -28,7 +36,16 @@ const App = () => {
       )}
 
       {/* Modal */}
-      {isOpenModal && <AddExpense handleNewSpending={handleNewSpending} />}
+      {isOpenModal && (
+        <AddExpense
+          handleNewSpending={handleNewSpending}
+          animateModal={animateModal}
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          saveExpense={saveExpense}
+          setSaveExpense={setSaveExpense}
+        />
+      )}
     </div>
   );
 };
