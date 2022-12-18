@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ExpenseForm from '../../ExpenseForm/ExpenseForm';
 import CloseExpenseIcon from '../components/CloseExpenseIcon';
+import { newId } from '../../../utils';
 
 const AddExpense = ({
   handleNewSpending,
@@ -36,7 +37,10 @@ const AddExpense = ({
   };
 
   /** Save expense in list*/
-  const onSaveExpense = (expense) => setSaveExpense([...saveExpense, expense]);
+  const onSaveExpense = (expense) => {
+    expense.id = newId();
+    setSaveExpense([...saveExpense, expense]);
+  };
 
   /** Validate if inputs are empty */
   const validateFormValues = (formDataObj) => {

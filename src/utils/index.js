@@ -4,3 +4,6 @@ export const parseToDolar = (numberValue) =>
     style: 'currency',
     currency: 'USD',
   }).format(numberValue);
+
+/** Generate unique id */
+export const newId = () => Math.floor(Math.random() * 1000000);
