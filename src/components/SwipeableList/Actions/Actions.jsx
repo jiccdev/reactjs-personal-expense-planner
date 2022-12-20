@@ -8,9 +8,7 @@ import { icons } from '../../Icon';
 
 const { FiTrash, MdModeEditOutline } = icons;
 
-const deleteItem = () => {
-  
-};
+const deleteItem = () => {};
 
 const editItem = () => {};
 
@@ -21,9 +19,6 @@ export const editExpenseItem = () => (
     </SwipeAction>
   </TrailingActions>
 );
-
-// LeadingActions
-// TrailingActions
 
 export const deleteExpenseItem = () => (
   <LeadingActions>
