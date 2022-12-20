@@ -34,7 +34,10 @@ const App = () => {
       {isValidBudget && (
         <Fragment>
           <main>
-            <ExpenseList expenseList={expenseList} />
+            <ExpenseList
+              expenseList={expenseList}
+              setExpenseList={setExpenseList}
+            />
           </main>
           <span onClick={handleNewSpending}>
             <AddExpenseIcon />

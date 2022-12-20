@@ -8,10 +8,6 @@ import { icons } from '../../Icon';
 
 const { FiTrash, MdModeEditOutline } = icons;
 
-const deleteItem = () => {};
-
-const editItem = () => {};
-
 export const editExpenseItem = () => (
   <TrailingActions>
     <SwipeAction onClick={() => console.info('Edit item')}>
