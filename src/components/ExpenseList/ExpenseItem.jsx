@@ -1,12 +1,4 @@
 import React from 'react';
-import { parseToDolar, parseDate } from '../../utils';
-
-import IconAhorro from '../../img/icons/icono_ahorro.svg';
-import IconHome from '../../img/icons/icono_casa.svg';
-import IconFood from '../../img/icons/icono_comida.svg';
-import IconHealth from '../../img/icons/icono_salud.svg';
-import IconSubscriptions from '../../img/icons/icono_suscripciones.svg';
-
 import {
   LeadingActions,
   SwipeableList,
@@ -15,9 +7,18 @@ import {
   TrailingActions,
 } from 'react-swipeable-list';
 import 'react-swipeable-list/dist/styles.css';
+import { parseToDolar, parseDate } from '../../utils';
+
+import IconAhorro from '../../img/icons/icono_ahorro.svg';
+import IconHome from '../../img/icons/icono_casa.svg';
+import IconFood from '../../img/icons/icono_comida.svg';
+import IconHealth from '../../img/icons/icono_salud.svg';
+import IconSubscriptions from '../../img/icons/icono_suscripciones.svg';
+import { icons } from '../Icon';
 
 const ExpenseItem = ({ expense, expenseList, setExpenseList }) => {
   const { id, name, amount, category, date } = expense;
+  const { FiTrash, MdModeEditOutline } = icons;
 
   const iconDictionary = {
     savings: IconAhorro,
@@ -38,11 +39,15 @@ const ExpenseItem = ({ expense, expenseList, setExpenseList }) => {
     );
   };
 
-  const trailingActions = () => {
-    console.log('delete');
+  const trailingActions = (id) => {
+    const deleteExpense = (id) => {
+      const newExpenseList = expenseList.filter((expense) => expense.id !== id);
+      setExpenseList(newExpenseList);
+    };
+
     return (
       <TrailingActions>
-        <SwipeAction onClick={() => console.info('Eliminar item')}>
+        <SwipeAction onClick={() => deleteExpense(id)}>
           <FiTrash />
         </SwipeAction>
       </TrailingActions>
@@ -52,8 +57,8 @@ const ExpenseItem = ({ expense, expenseList, setExpenseList }) => {
   return (
     <SwipeableList>
       <SwipeableListItem
-        leadingActions={leadingActions}
-        trailingActions={trailingActions}
+        leadingActions={leadingActions()}
+        trailingActions={trailingActions(id)}
       >
         <li className="gasto sombra">
           <div className="contenido-gasto">

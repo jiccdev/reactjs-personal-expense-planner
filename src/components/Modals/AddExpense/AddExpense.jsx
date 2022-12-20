@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ExpenseForm from '../../ExpenseForm/ExpenseForm';
 import CloseExpenseIcon from '../components/CloseExpenseIcon';
 import { newId } from '../../../utils';
+import { useExpenseList } from '../../../hooks/useExpenseList';
 
 const AddExpense = ({
   handleNewSpending,
