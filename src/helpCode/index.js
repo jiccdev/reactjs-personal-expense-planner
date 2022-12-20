@@ -1,7 +1,5 @@
 // Recorrer los valores de un objeto FORMA 1
 const validateFormValues = (formDataObj) => {
-  console.log(Object.values(formDataObj));
-
   for (let key in formDataObj) {
     if (!formDataObj[key]) {
       return setErrorEmptyFieldMsg(`All fields are required!`);

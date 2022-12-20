@@ -8,8 +8,8 @@ const AddExpense = ({
   animateModal,
   isOpenModal,
   setIsOpenModal,
-  saveExpense,
-  setSaveExpense,
+  expenseList,
+  setExpenseList,
 }) => {
   const [errorEmptyFieldMsg, setErrorEmptyFieldMsg] = useState('');
   const [formData, setFormData] = useState({
@@ -37,9 +37,10 @@ const AddExpense = ({
   };
 
   /** Save expense in list*/
-  const onSaveExpense = (expense) => {
+  const onExpenseListChange = (expense) => {
     expense.id = newId();
-    setSaveExpense([...saveExpense, expense]);
+    expense.date = Date.now();
+    setExpenseList([...expenseList, expense]);
   };
 
   /** Validate if inputs are empty */
@@ -52,11 +53,9 @@ const AddExpense = ({
   const onFormSubmit = (ev) => {
     ev.preventDefault();
     validateFormValues(formData);
-    onSaveExpense(formData);
+    onExpenseListChange(formData);
     resetFormField();
   };
-
-  console.log(saveExpense);
 
   return (
     <div className="modal">

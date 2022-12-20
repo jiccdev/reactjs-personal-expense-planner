@@ -7,3 +7,6 @@ export const parseToDolar = (numberValue) =>
 
 /** Generate unique id */
 export const newId = () => Math.floor(Math.random() * 1000000);
+
+/** Parse to date string */
+export const parseDate = (date) => new Date(date).toDateString();
