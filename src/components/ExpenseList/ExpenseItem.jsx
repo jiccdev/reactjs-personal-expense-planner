@@ -29,10 +29,24 @@ const ExpenseItem = ({ expense, expenseList, setExpenseList }) => {
 
   const leadingActions = () => {
     console.log('edit');
+    return (
+      <LeadingActions>
+        <SwipeAction onClick={() => console.info('Edit item')}>
+          <MdModeEditOutline />
+        </SwipeAction>
+      </LeadingActions>
+    );
   };
 
   const trailingActions = () => {
     console.log('delete');
+    return (
+      <TrailingActions>
+        <SwipeAction onClick={() => console.info('Eliminar item')}>
+          <FiTrash />
+        </SwipeAction>
+      </TrailingActions>
+    );
   };
 
   return (
