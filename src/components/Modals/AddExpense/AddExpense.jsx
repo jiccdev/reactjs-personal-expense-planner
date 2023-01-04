@@ -8,7 +8,6 @@ const AddExpense = ({
   handleNewSpending,
   animateModal,
   setAnimateModal,
-  isOpenModal,
   setIsOpenModal,
   expenseList,
   setExpenseList,

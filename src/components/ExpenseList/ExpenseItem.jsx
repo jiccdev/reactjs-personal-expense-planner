@@ -20,7 +20,6 @@ const ExpenseItem = ({
   expense,
   expenseList,
   setExpenseList,
-  editExpense,
   setEditExpense,
 }) => {
   const { id, name, amount, category, date } = expense;
@@ -55,7 +54,7 @@ const ExpenseItem = ({
 
     return (
       <TrailingActions>
-        <SwipeAction onClick={() => deleteExpense(id)}>
+        <SwipeAction onClick={() => deleteExpense(id)} destructive={true}>
           <FiTrash />
         </SwipeAction>
       </TrailingActions>
