@@ -1,12 +1,14 @@
 import React from 'react';
 import Messaje from '../Message/Messaje';
 
+
 const ExpenseForm = ({
   animateModal,
   formData,
   onFormSubmit,
   handleFormChange,
   errorEmptyFieldMsg,
+  editExpense,
 }) => {
   return (
     <form
@@ -17,7 +19,9 @@ const ExpenseForm = ({
         <Messaje tipo="error">{errorEmptyFieldMsg}</Messaje>
       )}
 
-      <legend>New Expense</legend>
+      <legend>
+        {Object.keys(editExpense).length > 0 ? 'Edit Expense' : 'New Expense'}
+      </legend>
       <div className="campo">
         <label htmlFor="name">Expense name</label>
         <input
@@ -59,7 +63,12 @@ const ExpenseForm = ({
         </select>
       </div>
 
-      <input type="submit" value="Add expense" />
+      <input
+        type="submit"
+        value={
+          Object.keys(editExpense).length > 0 ? 'Edit Expense' : 'New Expense'
+        }
+      />
     </form>
   );
 };

@@ -16,7 +16,13 @@ import IconHealth from '../../img/icons/icono_salud.svg';
 import IconSubscriptions from '../../img/icons/icono_suscripciones.svg';
 import { icons } from '../Icon';
 
-const ExpenseItem = ({ expense, expenseList, setExpenseList }) => {
+const ExpenseItem = ({
+  expense,
+  expenseList,
+  setExpenseList,
+  editExpense,
+  setEditExpense,
+}) => {
   const { id, name, amount, category, date } = expense;
   const { FiTrash, MdModeEditOutline } = icons;
 
@@ -29,10 +35,12 @@ const ExpenseItem = ({ expense, expenseList, setExpenseList }) => {
   };
 
   const leadingActions = () => {
-    console.log('edit');
+    const editExpense = (id, expense) => {
+      setEditExpense({ ...editExpense, ...expense });
+    };
     return (
       <LeadingActions>
-        <SwipeAction onClick={() => console.info('Edit item')}>
+        <SwipeAction onClick={() => editExpense(id, expense)}>
           <MdModeEditOutline />
         </SwipeAction>
       </LeadingActions>

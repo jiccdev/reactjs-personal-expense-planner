@@ -7,10 +7,13 @@ import { useExpenseList } from '../../../hooks/useExpenseList';
 const AddExpense = ({
   handleNewSpending,
   animateModal,
+  setAnimateModal,
   isOpenModal,
   setIsOpenModal,
   expenseList,
   setExpenseList,
+  setEditExpense,
+  editExpense,
 }) => {
   const [errorEmptyFieldMsg, setErrorEmptyFieldMsg] = useState('');
   const [formData, setFormData] = useState({
@@ -18,6 +21,8 @@ const AddExpense = ({
     amount: '',
     category: '',
   });
+  const [id, setId] = useState('');
+  const [date, setDate] = useState('');
 
   /** Reset Form fields */
   const resetFormField = () => {
@@ -39,9 +44,23 @@ const AddExpense = ({
 
   /** Save expense in list*/
   const onExpenseListChange = (expense) => {
-    expense.id = newId();
-    expense.date = Date.now();
-    setExpenseList([...expenseList, expense]);
+    if (Object.keys(editExpense).length > 0) {
+      const newExpenseList = expenseList.map((item) =>
+        item?.id === editExpense?.id
+          ? { ...expense, id: editExpense?.id }
+          : item
+      );
+
+      setExpenseList(newExpenseList);
+      setEditExpense({});
+      setIsOpenModal(false);
+      setAnimateModal(false);
+    } else {
+      const newExpense = { ...expense, id: newId(), date: new Date() };
+      setExpenseList([...expenseList, newExpense]);
+      setIsOpenModal(false);
+      setAnimateModal(false);
+    }
   };
 
   /** Validate if inputs are empty */
@@ -57,6 +76,14 @@ const AddExpense = ({
     onExpenseListChange(formData);
     resetFormField();
   };
+
+  useEffect(() => {
+    if (Object.keys(editExpense).length > 0) {
+      setId(editExpense.id);
+      setFormData({ ...editExpense, id });
+      setDate(editExpense?.date);
+    }
+  }, [editExpense]);
 
   return (
     <div className="modal">
@@ -75,6 +102,7 @@ const AddExpense = ({
         onFormSubmit={onFormSubmit}
         handleFormChange={handleFormChange}
         errorEmptyFieldMsg={errorEmptyFieldMsg}
+        editExpense={editExpense}
       />
     </div>
   );

@@ -1,7 +1,12 @@
 import React from 'react';
 import ExpenseItem from './ExpenseItem';
 
-const ExpenseList = ({ expenseList, setExpenseList }) => {
+const ExpenseList = ({
+  expenseList,
+  setExpenseList,
+  editExpense,
+  setEditExpense,
+}) => {
   return (
     <div className="listado-gastos contenedor">
       <h2>Expenses</h2>
@@ -13,6 +18,8 @@ const ExpenseList = ({ expenseList, setExpenseList }) => {
               expense={expense}
               expenseList={expenseList}
               setExpenseList={setExpenseList}
+              editExpense={editExpense}
+              setEditExpense={setEditExpense}
             />
           ))
         ) : (

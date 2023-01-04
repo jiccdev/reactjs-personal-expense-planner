@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Header from './components/Header/Header';
 import ExpenseList from './components/ExpenseList/ExpenseList';
 import AddExpense from './components/Modals/AddExpense/AddExpense';
@@ -10,15 +10,27 @@ const App = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
   const [expenseList, setExpenseList] = useState([]);
+  const [editExpense, setEditExpense] = useState({});
 
   /** Handle expense modal */
   const handleNewSpending = () => {
     setIsOpenModal(!isOpenModal);
+    setEditExpense({});
 
     setTimeout(() => {
       setAnimateModal(true);
     }, 300);
   };
+
+  useEffect(() => {
+    if (Object.keys(editExpense).length > 0) {
+      setIsOpenModal(true);
+
+      setTimeout(() => {
+        setAnimateModal(true);
+      }, 300);
+    }
+  }, [editExpense]);
 
   return (
     <div className={isOpenModal ? 'fijar' : ''}>
@@ -37,6 +49,8 @@ const App = () => {
             <ExpenseList
               expenseList={expenseList}
               setExpenseList={setExpenseList}
+              editExpense={editExpense}
+              setEditExpense={setEditExpense}
             />
           </main>
           <span onClick={handleNewSpending}>
@@ -50,10 +64,13 @@ const App = () => {
         <AddExpense
           handleNewSpending={handleNewSpending}
           animateModal={animateModal}
+          setAnimateModal={setAnimateModal}
           isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
           expenseList={expenseList}
           setExpenseList={setExpenseList}
+          editExpense={editExpense}
+          setEditExpense={setEditExpense}
         />
       )}
     </div>
