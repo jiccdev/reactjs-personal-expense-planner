@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import CircularProgressBar from '../CircularProgressBar/CircularProgressBar';
 import { parseToDolar } from '../../utils';
 
 const BudgetControl = ({ budget, expenseList }) => {
   const [aviableBudget, setAviableBudget] = useState(0);
   const [spentBudget, setSpentExpense] = useState(0);
+  const [percentage, setPercentage] = useState(0);
 
   /** Calculate spent budget */
   const calculateSpentBudget = (expenseList) => {
@@ -25,10 +27,17 @@ const BudgetControl = ({ budget, expenseList }) => {
     calculateAviableBudget();
   }, [expenseList, spentBudget]);
 
+  useEffect(() => {
+    const newPercentage = (((budget - aviableBudget) / budget) * 100).toFixed(
+      2
+    );
+    setPercentage(newPercentage);
+  }, [aviableBudget]);
+
   return (
     <div className="contenedor-presupuesto contenedor sombra dos-columnas">
       <div>
-        <p>Graphic</p>
+        <CircularProgressBar value={percentage} />
       </div>
 
       <div className="contenido-presupuesto">
