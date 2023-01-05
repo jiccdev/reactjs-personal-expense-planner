@@ -45,8 +45,18 @@ const App = () => {
       setBudget(budgetLS);
       setIsValidBudget(true);
     }
+  }, []);
 
-    console.log('presupuesto LS', budgetLS);
+  useEffect(() => {
+    localStorage.setItem('expenseList', JSON.stringify(expenseList) ?? []);
+  }, [expenseList]);
+
+  useEffect(() => {
+    const expenseListLS = JSON.parse(localStorage.getItem('expenseList')) ?? [];
+
+    if (expenseListLS.length > 0) {
+      setExpenseList(expenseListLS);
+    }
   }, []);
 
   return (
