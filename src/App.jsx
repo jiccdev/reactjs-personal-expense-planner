@@ -8,10 +8,14 @@ const App = () => {
   const [budget, setBudget] = useState(
     Number(localStorage.getItem('budget')) ?? 0
   );
+  const [expenseList, setExpenseList] = useState(
+    localStorage.getItem('expenseList')
+      ? JSON.parse(localStorage.getItem('expenseList'))
+      : []
+  );
   const [isValidBudget, setIsValidBudget] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
-  const [expenseList, setExpenseList] = useState([]);
   const [editExpense, setEditExpense] = useState({});
 
   /** Handle expense modal */
@@ -56,6 +60,8 @@ const App = () => {
 
     if (expenseListLS.length > 0) {
       setExpenseList(expenseListLS);
+    } else {
+      setExpenseList([]);
     }
   }, []);
 
