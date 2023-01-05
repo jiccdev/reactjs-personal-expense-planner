@@ -5,7 +5,9 @@ import AddExpense from './components/Modals/AddExpense/AddExpense';
 import AddExpenseIcon from './components/Modals/components/AddExpenseIcon';
 
 const App = () => {
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState(
+    Number(localStorage.getItem('budget')) ?? 0
+  );
   const [isValidBudget, setIsValidBudget] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
@@ -31,6 +33,21 @@ const App = () => {
       }, 300);
     }
   }, [editExpense]);
+
+  useEffect(() => {
+    localStorage.setItem('budget', JSON.stringify(budget) ?? 0);
+  }, [budget]);
+
+  useEffect(() => {
+    const budgetLS = Number(localStorage.getItem('budget')) ?? 0;
+
+    if (budgetLS > 0) {
+      setBudget(budgetLS);
+      setIsValidBudget(true);
+    }
+
+    console.log('presupuesto LS', budgetLS);
+  }, []);
 
   return (
     <div className={isOpenModal ? 'fijar' : ''}>
